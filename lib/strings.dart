@@ -22,4 +22,16 @@ class Strings {
       "Invista sabendo quanto pode ganhar";
   static const String openYourAccount = "Abrir conta";
   static const String signIn = "Entrar";
+
+  // Login
+  static const String theEasiestWayTo = "O jeito mais fácil de";
+  static const String invest = "investir";
+  static const String stockExchanges = "na Bolsa";
+  static const String cpf = "Cpf";
+  static const String invalidCpf = "CPF inválido";
+  static const String password = "Senha";
+  static const String dontHaveAccount = "Não tem uma conta?";
+  static const String signUp = "Registre-se";
+  static const String email = "E-mail";
+  static const String forgotPassword = "Esqueceu sua senha?";
 }

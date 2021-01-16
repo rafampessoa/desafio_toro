@@ -4,6 +4,7 @@ class AppColors {
   static const Color primary = Color(0xFF00ADD2);
   static const Color secondary = Color(0xFF091827);
   static const Color grey = Color(0xFFC0C0C0);
+  static const Color invalidField = Color(0xFFFF0000);
 }
 
 class FontSize {
@@ -11,4 +12,5 @@ class FontSize {
 
   static const header = 24;
   static const bigHeader = 32;
+  static const extraHeader = 38;
 }

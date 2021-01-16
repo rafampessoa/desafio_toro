@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:desafioToro/auth/domain/entities/secure_storage.dart';
 import 'package:injectable/injectable.dart';
 

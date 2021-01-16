@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:desafioToro/auth/presentation/pages/login/login_page.dart';
 import 'package:desafioToro/auth/presentation/pages/onboarding/onboarding_page.dart';
 import 'package:desafioToro/auth/presentation/pages/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,7 @@ import 'package:flutter/material.dart';
       transitionsBuilder: fadeTransition,
       durationInMilliseconds: 400,
       page: OnboardingPage),
-  // CustomRoute(
-  //     transitionsBuilder: fadeTransition,
-  //     durationInMilliseconds: 400,
-  //     page: AuthPage)
+  MaterialRoute(page: LoginPage)
 ])
 class $Router {}
 
