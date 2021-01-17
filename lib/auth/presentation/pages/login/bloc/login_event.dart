@@ -9,7 +9,7 @@ abstract class LoginEvent with _$LoginEvent {
     @required String password,
   }) = _OnTabLogin;
   const factory LoginEvent.onChangeForm({
-    String cpf,
+    bool isValidCpf,
     String email,
     @required String password,
   }) = _OnChangeForm;

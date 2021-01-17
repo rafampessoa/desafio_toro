@@ -32,9 +32,9 @@ class _$LoginEventTearOff {
 
 // ignore: unused_element
   _OnChangeForm onChangeForm(
-      {String cpf, String email, @required String password}) {
+      {bool isValidCpf, String email, @required String password}) {
     return _OnChangeForm(
-      cpf: cpf,
+      isValidCpf: isValidCpf,
       email: email,
       password: password,
     );
@@ -51,13 +51,14 @@ mixin _$LoginEvent {
   TResult when<TResult extends Object>({
     @required TResult onTabChange(int index),
     @required TResult onTabLogin(String cpf, String email, String password),
-    @required TResult onChangeForm(String cpf, String email, String password),
+    @required
+        TResult onChangeForm(bool isValidCpf, String email, String password),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult onTabChange(int index),
     TResult onTabLogin(String cpf, String email, String password),
-    TResult onChangeForm(String cpf, String email, String password),
+    TResult onChangeForm(bool isValidCpf, String email, String password),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -153,7 +154,8 @@ class _$_OnTabChange implements _OnTabChange {
   TResult when<TResult extends Object>({
     @required TResult onTabChange(int index),
     @required TResult onTabLogin(String cpf, String email, String password),
-    @required TResult onChangeForm(String cpf, String email, String password),
+    @required
+        TResult onChangeForm(bool isValidCpf, String email, String password),
   }) {
     assert(onTabChange != null);
     assert(onTabLogin != null);
@@ -166,7 +168,7 @@ class _$_OnTabChange implements _OnTabChange {
   TResult maybeWhen<TResult extends Object>({
     TResult onTabChange(int index),
     TResult onTabLogin(String cpf, String email, String password),
-    TResult onChangeForm(String cpf, String email, String password),
+    TResult onChangeForm(bool isValidCpf, String email, String password),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -292,7 +294,8 @@ class _$_OnTabLogin implements _OnTabLogin {
   TResult when<TResult extends Object>({
     @required TResult onTabChange(int index),
     @required TResult onTabLogin(String cpf, String email, String password),
-    @required TResult onChangeForm(String cpf, String email, String password),
+    @required
+        TResult onChangeForm(bool isValidCpf, String email, String password),
   }) {
     assert(onTabChange != null);
     assert(onTabLogin != null);
@@ -305,7 +308,7 @@ class _$_OnTabLogin implements _OnTabLogin {
   TResult maybeWhen<TResult extends Object>({
     TResult onTabChange(int index),
     TResult onTabLogin(String cpf, String email, String password),
-    TResult onChangeForm(String cpf, String email, String password),
+    TResult onChangeForm(bool isValidCpf, String email, String password),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -360,7 +363,7 @@ abstract class _$OnChangeFormCopyWith<$Res> {
   factory _$OnChangeFormCopyWith(
           _OnChangeForm value, $Res Function(_OnChangeForm) then) =
       __$OnChangeFormCopyWithImpl<$Res>;
-  $Res call({String cpf, String email, String password});
+  $Res call({bool isValidCpf, String email, String password});
 }
 
 /// @nodoc
@@ -375,12 +378,13 @@ class __$OnChangeFormCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object cpf = freezed,
+    Object isValidCpf = freezed,
     Object email = freezed,
     Object password = freezed,
   }) {
     return _then(_OnChangeForm(
-      cpf: cpf == freezed ? _value.cpf : cpf as String,
+      isValidCpf:
+          isValidCpf == freezed ? _value.isValidCpf : isValidCpf as bool,
       email: email == freezed ? _value.email : email as String,
       password: password == freezed ? _value.password : password as String,
     ));
@@ -389,11 +393,11 @@ class __$OnChangeFormCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_OnChangeForm implements _OnChangeForm {
-  const _$_OnChangeForm({this.cpf, this.email, @required this.password})
+  const _$_OnChangeForm({this.isValidCpf, this.email, @required this.password})
       : assert(password != null);
 
   @override
-  final String cpf;
+  final bool isValidCpf;
   @override
   final String email;
   @override
@@ -401,15 +405,16 @@ class _$_OnChangeForm implements _OnChangeForm {
 
   @override
   String toString() {
-    return 'LoginEvent.onChangeForm(cpf: $cpf, email: $email, password: $password)';
+    return 'LoginEvent.onChangeForm(isValidCpf: $isValidCpf, email: $email, password: $password)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _OnChangeForm &&
-            (identical(other.cpf, cpf) ||
-                const DeepCollectionEquality().equals(other.cpf, cpf)) &&
+            (identical(other.isValidCpf, isValidCpf) ||
+                const DeepCollectionEquality()
+                    .equals(other.isValidCpf, isValidCpf)) &&
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.password, password) ||
@@ -420,7 +425,7 @@ class _$_OnChangeForm implements _OnChangeForm {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(cpf) ^
+      const DeepCollectionEquality().hash(isValidCpf) ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(password);
 
@@ -434,12 +439,13 @@ class _$_OnChangeForm implements _OnChangeForm {
   TResult when<TResult extends Object>({
     @required TResult onTabChange(int index),
     @required TResult onTabLogin(String cpf, String email, String password),
-    @required TResult onChangeForm(String cpf, String email, String password),
+    @required
+        TResult onChangeForm(bool isValidCpf, String email, String password),
   }) {
     assert(onTabChange != null);
     assert(onTabLogin != null);
     assert(onChangeForm != null);
-    return onChangeForm(cpf, email, password);
+    return onChangeForm(isValidCpf, email, password);
   }
 
   @override
@@ -447,12 +453,12 @@ class _$_OnChangeForm implements _OnChangeForm {
   TResult maybeWhen<TResult extends Object>({
     TResult onTabChange(int index),
     TResult onTabLogin(String cpf, String email, String password),
-    TResult onChangeForm(String cpf, String email, String password),
+    TResult onChangeForm(bool isValidCpf, String email, String password),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (onChangeForm != null) {
-      return onChangeForm(cpf, email, password);
+      return onChangeForm(isValidCpf, email, password);
     }
     return orElse();
   }
@@ -488,9 +494,11 @@ class _$_OnChangeForm implements _OnChangeForm {
 
 abstract class _OnChangeForm implements LoginEvent {
   const factory _OnChangeForm(
-      {String cpf, String email, @required String password}) = _$_OnChangeForm;
+      {bool isValidCpf,
+      String email,
+      @required String password}) = _$_OnChangeForm;
 
-  String get cpf;
+  bool get isValidCpf;
   String get email;
   String get password;
   @JsonKey(ignore: true)

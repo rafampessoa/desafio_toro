@@ -30,7 +30,9 @@ class App extends StatelessWidget {
 
   void _handleWithUserAuth(AuthState state, BuildContext context) => state.map(
         initial: (_) => null,
-        authenticated: (_) => null,
+        authenticated: (_) => navigatorKey.currentState.pushReplacementNamed(
+          router.Routes.onboardingPage,
+        ),
         unauthenticated: (_) => navigatorKey.currentState.pushReplacementNamed(
           router.Routes.onboardingPage,
         ),

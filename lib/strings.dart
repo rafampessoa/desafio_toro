@@ -1,6 +1,9 @@
 class Strings {
   // Common
   static const String unexpectedError = "Erro inesperado";
+  static const String unexpectedErrorDescription =
+      "Infelizmente ocorreu um erro inesperado, tente novamente mais tarde";
+  static const String invalidEmail = "E-mail inválido";
 
   // Splash Page
   static const String toroInvestimentos = "Toro Investimentos";

@@ -2,11 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:desafioToro/assets.dart';
 import 'package:desafioToro/auth/presentation/pages/login/bloc/login_bloc.dart';
 import 'package:desafioToro/auth/presentation/widgets/password_input.dart';
+import 'package:desafioToro/common/presentation/widgets/base_raised_button.dart';
 import 'package:desafioToro/common/presentation/widgets/cpf_input/bloc/cpf_input_bloc.dart';
 import 'package:desafioToro/common/presentation/widgets/cpf_input/cpf_input.dart';
 import 'package:desafioToro/common/presentation/widgets/email_input/email_input.dart';
+import 'package:desafioToro/common/presentation/widgets/error_snackbar.dart';
 import 'package:desafioToro/constant.dart';
 import 'package:desafioToro/injection.dart';
+import 'package:desafioToro/router.gr.dart';
 import 'package:desafioToro/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,10 +71,13 @@ class _LoginPageState extends State<LoginPage>
                     SizedBox(height: 32.h),
                     _buildTabSwitcher(state.isCpfLogin),
                     SizedBox(height: 16.h),
-                    _buildTabForm(),
-                    _buildSignInBtn(state.isValidForm),
+                    _buildTabForm(state.isInvalidEmail),
+                    _buildSignInBtn(
+                      state.isValidForm,
+                      state.isLoading,
+                    ),
                     SizedBox(height: 8.h),
-                    _buildSignUpLabel()
+                    _buildSignUpLabel(),
                   ],
                 );
               },
@@ -82,7 +88,7 @@ class _LoginPageState extends State<LoginPage>
     );
   }
 
-  Widget _buildTabForm() {
+  Widget _buildTabForm(bool isInvalidEmail) {
     return SizedBox(
       height: 200.h,
       child: TabBarView(
@@ -90,7 +96,7 @@ class _LoginPageState extends State<LoginPage>
         physics: NeverScrollableScrollPhysics(),
         children: [
           _buildCpfLogin(),
-          _buildEmailLogin(),
+          _buildEmailLogin(isInvalidEmail),
         ],
       ),
     );
@@ -175,17 +181,12 @@ class _LoginPageState extends State<LoginPage>
     );
   }
 
-  RaisedButton _buildSignInBtn(bool isValidForm) {
-    return RaisedButton(
-      onPressed: _onSubmit,
-      child: Center(
-        child: Text(
-          Strings.signIn,
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
+  Widget _buildSignInBtn(bool isValidForm, bool isLoading) {
+    return BaseRaisedButton(
+      onTap: _onSubmit,
+      text: Strings.signIn,
+      isLoading: isLoading,
+      isValid: isValidForm,
     );
   }
 
@@ -194,20 +195,22 @@ class _LoginPageState extends State<LoginPage>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CpfInput(
-          onChange: (v) =>
-              _onChangeFormInput(password: passwordController.text, cpf: ""),
-          onValidCpf: (v) =>
-              _onChangeFormInput(password: passwordController.text, cpf: v),
+          onChange: (v) => _onChangeFormInput(
+              password: passwordController.text, isValidCpf: false),
+          onValidCpf: (v) => _onChangeFormInput(
+              password: passwordController.text, isValidCpf: true),
           textEditingController: cpfController,
         ),
         SizedBox(height: 16.h),
         Flexible(
-          child: PasswordInput(
-            textEditingController: passwordController,
-            onChange: (password) => _onChangeFormInput(
-              password: password,
-              email: emailController.text,
-              cpf: cpfController.text,
+          child: BlocBuilder<CpfInputBloc, CpfInputState>(
+            builder: (context, state) => PasswordInput(
+              textEditingController: passwordController,
+              onChange: (password) => _onChangeFormInput(
+                password: password,
+                email: emailController.text,
+                isValidCpf: state.isValid,
+              ),
             ),
           ),
         ),
@@ -224,11 +227,13 @@ class _LoginPageState extends State<LoginPage>
     );
   }
 
-  Column _buildEmailLogin() {
+  Column _buildEmailLogin(bool isInvalidEmail) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         EmailInput(
+          invalidEmail: isInvalidEmail,
+          textEditingController: emailController,
           onChange: (email) => _onChangeFormInput(
               password: passwordController.text, email: email),
         ),
@@ -238,7 +243,7 @@ class _LoginPageState extends State<LoginPage>
           onChange: (password) => _onChangeFormInput(
             password: password,
             email: emailController.text,
-            cpf: cpfController.text,
+            isValidCpf: false,
           ),
         ),
         SizedBox(height: 8.h),
@@ -286,7 +291,13 @@ class _LoginPageState extends State<LoginPage>
 
   void _handleLoginSubmit(BuildContext context, LoginState state) {
     if (state.unexpectedError != null && state.unexpectedError.isNotEmpty) {
-      // TODO: SnackBar;
+      showErrorSnackbar(context, text: state.unexpectedError);
+      return;
+    }
+
+    if (state.isSuccessLogin) {
+      ExtendedNavigator.of(context).replace(Routes.homePage);
+      return;
     }
 
     if (state.isCpfLogin) {
@@ -308,12 +319,12 @@ class _LoginPageState extends State<LoginPage>
   }
 
   void _onChangeFormInput(
-          {String cpf, String email, @required String password}) =>
+          {bool isValidCpf = false, String email, @required String password}) =>
       context.read<LoginBloc>().add(
             LoginEvent.onChangeForm(
               password: password ?? "",
               email: email ?? "",
-              cpf: cpf ?? "",
+              isValidCpf: isValidCpf,
             ),
           );
 

@@ -38,6 +38,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapEventToSubmit(_OnTabLogin event) async* {
+    yield state.copyWith(
+        isLoading: false, unexpectedError: null, isSuccessLogin: false);
     String _login;
     if (event.email != null) {
       final isValidEmail = isValidEmailUseCase(event.email);
@@ -57,7 +59,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       (l) => state.copyWith(
         isLoading: false,
         unexpectedError: l.map(
-          unexpected: (e) => Strings.unexpectedError,
+          unexpected: (e) => Strings.unexpectedErrorDescription,
           server: (e) => e.error,
         ),
       ),
@@ -70,12 +72,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapEventToValidForm(_OnChangeForm event) async* {
     if (event.password.length > 5) {
-      if (event.cpf.isNotEmpty || event.email.isNotEmpty) {
-        yield state.copyWith(isValidForm: true);
+      if (event.isValidCpf || event.email.isNotEmpty) {
+        yield state.copyWith(
+          isValidForm: true,
+          isLoading: false,
+          unexpectedError: null,
+          isSuccessLogin: false,
+          isInvalidEmail: false,
+        );
         return;
       }
     }
 
-    yield state.copyWith(isValidForm: false);
+    yield state.copyWith(
+      isValidForm: false,
+      isLoading: false,
+      unexpectedError: null,
+      isSuccessLogin: false,
+      isInvalidEmail: false,
+    );
   }
 }

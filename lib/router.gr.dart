@@ -12,16 +12,19 @@ import 'package:flutter/material.dart';
 import 'auth/presentation/pages/login/login_page.dart';
 import 'auth/presentation/pages/onboarding/onboarding_page.dart';
 import 'auth/presentation/pages/splash_page.dart';
+import 'common/presentation/pages/home_page.dart';
 import 'router.dart';
 
 class Routes {
   static const String splashPage = '/';
   static const String onboardingPage = '/onboarding-page';
   static const String loginPage = '/login-page';
+  static const String homePage = '/home-page';
   static const all = <String>{
     splashPage,
     onboardingPage,
     loginPage,
+    homePage,
   };
 }
 
@@ -32,6 +35,7 @@ class Router extends RouterBase {
     RouteDef(Routes.splashPage, page: SplashPage),
     RouteDef(Routes.onboardingPage, page: OnboardingPage),
     RouteDef(Routes.loginPage, page: LoginPage),
+    RouteDef(Routes.homePage, page: HomePage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -62,6 +66,15 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    HomePage: (data) {
+      final args = data.getArgs<HomePageArguments>(
+        orElse: () => HomePageArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => HomePage(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -73,4 +86,10 @@ class Router extends RouterBase {
 class LoginPageArguments {
   final Key key;
   LoginPageArguments({this.key});
+}
+
+/// HomePage arguments holder class
+class HomePageArguments {
+  final Key key;
+  HomePageArguments({this.key});
 }
