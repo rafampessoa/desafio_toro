@@ -6,9 +6,10 @@ Processo seletivo para Toro Investimentos
 
 ## Setup
 
-1. `git clone`
+1. `git clone git@github.com:rafampessoa/desafio_toro.git`
 2. Instale as dependências `flutter pub get`
 3. `flutter pub run build_runner build --delete-conflicting-outputs`
+4. execute o código no emulador
 
 ## Features
 
