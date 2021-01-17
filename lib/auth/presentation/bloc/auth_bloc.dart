@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:desafioToro/auth/domain/usecases/is_logged_use_case.dart';
+import 'package:desafioToro/auth/domain/usecases/logout_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -13,7 +14,8 @@ part 'auth_bloc.freezed.dart';
 @lazySingleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IsLoggedUseCase isLoggedUseCase;
-  AuthBloc(this.isLoggedUseCase) : super(_Initial());
+  final LogoutUseCase logoutUseCase;
+  AuthBloc(this.isLoggedUseCase, this.logoutUseCase) : super(_Initial());
 
   @override
   Stream<AuthState> mapEventToState(
@@ -46,6 +48,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Stream<AuthState> _mapEventToUnauthenticate(_Unauthenticate event) async* {
+    await logoutUseCase();
     yield AuthState.unauthenticated();
   }
 

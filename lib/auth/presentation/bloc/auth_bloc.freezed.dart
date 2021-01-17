@@ -26,10 +26,8 @@ class _$AuthEventTearOff {
   }
 
 // ignore: unused_element
-  _Authenticate authenticate(BuildContext context) {
-    return _Authenticate(
-      context,
-    );
+  _Authenticate authenticate() {
+    return const _Authenticate();
   }
 }
 
@@ -43,13 +41,13 @@ mixin _$AuthEvent {
   TResult when<TResult extends Object>({
     @required TResult appStarted(BuildContext context),
     @required TResult unauthenticate(),
-    @required TResult authenticate(BuildContext context),
+    @required TResult authenticate(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult appStarted(BuildContext context),
     TResult unauthenticate(),
-    TResult authenticate(BuildContext context),
+    TResult authenticate(),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -144,7 +142,7 @@ class _$_AppStarted implements _AppStarted {
   TResult when<TResult extends Object>({
     @required TResult appStarted(BuildContext context),
     @required TResult unauthenticate(),
-    @required TResult authenticate(BuildContext context),
+    @required TResult authenticate(),
   }) {
     assert(appStarted != null);
     assert(unauthenticate != null);
@@ -157,7 +155,7 @@ class _$_AppStarted implements _AppStarted {
   TResult maybeWhen<TResult extends Object>({
     TResult appStarted(BuildContext context),
     TResult unauthenticate(),
-    TResult authenticate(BuildContext context),
+    TResult authenticate(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -244,7 +242,7 @@ class _$_Unauthenticate implements _Unauthenticate {
   TResult when<TResult extends Object>({
     @required TResult appStarted(BuildContext context),
     @required TResult unauthenticate(),
-    @required TResult authenticate(BuildContext context),
+    @required TResult authenticate(),
   }) {
     assert(appStarted != null);
     assert(unauthenticate != null);
@@ -257,7 +255,7 @@ class _$_Unauthenticate implements _Unauthenticate {
   TResult maybeWhen<TResult extends Object>({
     TResult appStarted(BuildContext context),
     TResult unauthenticate(),
-    TResult authenticate(BuildContext context),
+    TResult authenticate(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -305,7 +303,6 @@ abstract class _$AuthenticateCopyWith<$Res> {
   factory _$AuthenticateCopyWith(
           _Authenticate value, $Res Function(_Authenticate) then) =
       __$AuthenticateCopyWithImpl<$Res>;
-  $Res call({BuildContext context});
 }
 
 /// @nodoc
@@ -317,57 +314,36 @@ class __$AuthenticateCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
 
   @override
   _Authenticate get _value => super._value as _Authenticate;
-
-  @override
-  $Res call({
-    Object context = freezed,
-  }) {
-    return _then(_Authenticate(
-      context == freezed ? _value.context : context as BuildContext,
-    ));
-  }
 }
 
 /// @nodoc
 class _$_Authenticate implements _Authenticate {
-  const _$_Authenticate(this.context) : assert(context != null);
-
-  @override
-  final BuildContext context;
+  const _$_Authenticate();
 
   @override
   String toString() {
-    return 'AuthEvent.authenticate(context: $context)';
+    return 'AuthEvent.authenticate()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Authenticate &&
-            (identical(other.context, context) ||
-                const DeepCollectionEquality().equals(other.context, context)));
+    return identical(this, other) || (other is _Authenticate);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(context);
-
-  @JsonKey(ignore: true)
-  @override
-  _$AuthenticateCopyWith<_Authenticate> get copyWith =>
-      __$AuthenticateCopyWithImpl<_Authenticate>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult appStarted(BuildContext context),
     @required TResult unauthenticate(),
-    @required TResult authenticate(BuildContext context),
+    @required TResult authenticate(),
   }) {
     assert(appStarted != null);
     assert(unauthenticate != null);
     assert(authenticate != null);
-    return authenticate(context);
+    return authenticate();
   }
 
   @override
@@ -375,12 +351,12 @@ class _$_Authenticate implements _Authenticate {
   TResult maybeWhen<TResult extends Object>({
     TResult appStarted(BuildContext context),
     TResult unauthenticate(),
-    TResult authenticate(BuildContext context),
+    TResult authenticate(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (authenticate != null) {
-      return authenticate(context);
+      return authenticate();
     }
     return orElse();
   }
@@ -415,11 +391,7 @@ class _$_Authenticate implements _Authenticate {
 }
 
 abstract class _Authenticate implements AuthEvent {
-  const factory _Authenticate(BuildContext context) = _$_Authenticate;
-
-  BuildContext get context;
-  @JsonKey(ignore: true)
-  _$AuthenticateCopyWith<_Authenticate> get copyWith;
+  const factory _Authenticate() = _$_Authenticate;
 }
 
 /// @nodoc

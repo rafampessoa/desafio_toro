@@ -41,4 +41,14 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(AuthFailures.unexpected(e));
     }
   }
+
+  @override
+  Future<Either<AuthFailures, Unit>> removeToken() async {
+    try {
+      await authLocalDataSource.removeToken();
+      return right(null);
+    } catch (e) {
+      return left(AuthFailures.unexpected(e));
+    }
+  }
 }

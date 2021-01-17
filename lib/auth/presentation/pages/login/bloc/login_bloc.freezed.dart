@@ -516,7 +516,6 @@ class _$LoginStateTearOff {
       bool isLoading,
       bool isValidForm,
       bool isInvalidEmail,
-      bool isSuccessLogin,
       String unexpectedError}) {
     return _LoginState(
       isCpfLogin: isCpfLogin,
@@ -524,7 +523,6 @@ class _$LoginStateTearOff {
       isLoading: isLoading,
       isValidForm: isValidForm,
       isInvalidEmail: isInvalidEmail,
-      isSuccessLogin: isSuccessLogin,
       unexpectedError: unexpectedError,
     );
   }
@@ -541,7 +539,6 @@ mixin _$LoginState {
   bool get isLoading;
   bool get isValidForm;
   bool get isInvalidEmail;
-  bool get isSuccessLogin;
   String get unexpectedError;
 
   @JsonKey(ignore: true)
@@ -559,7 +556,6 @@ abstract class $LoginStateCopyWith<$Res> {
       bool isLoading,
       bool isValidForm,
       bool isInvalidEmail,
-      bool isSuccessLogin,
       String unexpectedError});
 }
 
@@ -578,7 +574,6 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
     Object isLoading = freezed,
     Object isValidForm = freezed,
     Object isInvalidEmail = freezed,
-    Object isSuccessLogin = freezed,
     Object unexpectedError = freezed,
   }) {
     return _then(_value.copyWith(
@@ -593,9 +588,6 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
       isInvalidEmail: isInvalidEmail == freezed
           ? _value.isInvalidEmail
           : isInvalidEmail as bool,
-      isSuccessLogin: isSuccessLogin == freezed
-          ? _value.isSuccessLogin
-          : isSuccessLogin as bool,
       unexpectedError: unexpectedError == freezed
           ? _value.unexpectedError
           : unexpectedError as String,
@@ -615,7 +607,6 @@ abstract class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
       bool isLoading,
       bool isValidForm,
       bool isInvalidEmail,
-      bool isSuccessLogin,
       String unexpectedError});
 }
 
@@ -636,7 +627,6 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
     Object isLoading = freezed,
     Object isValidForm = freezed,
     Object isInvalidEmail = freezed,
-    Object isSuccessLogin = freezed,
     Object unexpectedError = freezed,
   }) {
     return _then(_LoginState(
@@ -651,9 +641,6 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
       isInvalidEmail: isInvalidEmail == freezed
           ? _value.isInvalidEmail
           : isInvalidEmail as bool,
-      isSuccessLogin: isSuccessLogin == freezed
-          ? _value.isSuccessLogin
-          : isSuccessLogin as bool,
       unexpectedError: unexpectedError == freezed
           ? _value.unexpectedError
           : unexpectedError as String,
@@ -669,7 +656,6 @@ class _$_LoginState implements _LoginState {
       this.isLoading,
       this.isValidForm,
       this.isInvalidEmail,
-      this.isSuccessLogin,
       this.unexpectedError});
 
   @override
@@ -683,13 +669,11 @@ class _$_LoginState implements _LoginState {
   @override
   final bool isInvalidEmail;
   @override
-  final bool isSuccessLogin;
-  @override
   final String unexpectedError;
 
   @override
   String toString() {
-    return 'LoginState(isCpfLogin: $isCpfLogin, isInvalidCredentials: $isInvalidCredentials, isLoading: $isLoading, isValidForm: $isValidForm, isInvalidEmail: $isInvalidEmail, isSuccessLogin: $isSuccessLogin, unexpectedError: $unexpectedError)';
+    return 'LoginState(isCpfLogin: $isCpfLogin, isInvalidCredentials: $isInvalidCredentials, isLoading: $isLoading, isValidForm: $isValidForm, isInvalidEmail: $isInvalidEmail, unexpectedError: $unexpectedError)';
   }
 
   @override
@@ -711,9 +695,6 @@ class _$_LoginState implements _LoginState {
             (identical(other.isInvalidEmail, isInvalidEmail) ||
                 const DeepCollectionEquality()
                     .equals(other.isInvalidEmail, isInvalidEmail)) &&
-            (identical(other.isSuccessLogin, isSuccessLogin) ||
-                const DeepCollectionEquality()
-                    .equals(other.isSuccessLogin, isSuccessLogin)) &&
             (identical(other.unexpectedError, unexpectedError) ||
                 const DeepCollectionEquality()
                     .equals(other.unexpectedError, unexpectedError)));
@@ -727,7 +708,6 @@ class _$_LoginState implements _LoginState {
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(isValidForm) ^
       const DeepCollectionEquality().hash(isInvalidEmail) ^
-      const DeepCollectionEquality().hash(isSuccessLogin) ^
       const DeepCollectionEquality().hash(unexpectedError);
 
   @JsonKey(ignore: true)
@@ -743,7 +723,6 @@ abstract class _LoginState implements LoginState {
       bool isLoading,
       bool isValidForm,
       bool isInvalidEmail,
-      bool isSuccessLogin,
       String unexpectedError}) = _$_LoginState;
 
   @override
@@ -756,8 +735,6 @@ abstract class _LoginState implements LoginState {
   bool get isValidForm;
   @override
   bool get isInvalidEmail;
-  @override
-  bool get isSuccessLogin;
   @override
   String get unexpectedError;
   @override

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:desafioToro/auth/domain/usecases/login_use_case.dart';
+import 'package:desafioToro/auth/presentation/bloc/auth_bloc.dart';
 import 'package:desafioToro/common/domain/usecases/is_valid_email_use_case.dart';
 import 'package:desafioToro/strings.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,7 +16,8 @@ part 'login_bloc.freezed.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final IsValidEmailUseCase isValidEmailUseCase;
   final LoginUseCase loginUseCase;
-  LoginBloc(this.isValidEmailUseCase, this.loginUseCase)
+  final AuthBloc authBloc;
+  LoginBloc(this.isValidEmailUseCase, this.loginUseCase, this.authBloc)
       : super(LoginState.initial());
 
   @override
@@ -39,7 +41,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapEventToSubmit(_OnTabLogin event) async* {
     yield state.copyWith(
-        isLoading: false, unexpectedError: null, isSuccessLogin: false);
+      isLoading: false,
+      unexpectedError: null,
+    );
     String _login;
     if (event.email != null) {
       final isValidEmail = isValidEmailUseCase(event.email);
@@ -55,19 +59,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     yield state.copyWith(isLoading: true);
     final result = await loginUseCase(_login, event.password);
 
-    yield result.fold(
-      (l) => state.copyWith(
+    yield* result.fold((l) async* {
+      yield state.copyWith(
         isLoading: false,
         unexpectedError: l.map(
           unexpected: (e) => Strings.unexpectedErrorDescription,
           server: (e) => e.error,
         ),
-      ),
-      (r) => state.copyWith(
-        isLoading: false,
-        isSuccessLogin: true,
-      ),
-    );
+      );
+    }, (r) async* {
+      yield state.copyWith(isLoading: false);
+
+      authBloc.add(AuthEvent.authenticate());
+    });
   }
 
   Stream<LoginState> _mapEventToValidForm(_OnChangeForm event) async* {
@@ -77,7 +81,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           isValidForm: true,
           isLoading: false,
           unexpectedError: null,
-          isSuccessLogin: false,
           isInvalidEmail: false,
         );
         return;
@@ -88,7 +91,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       isValidForm: false,
       isLoading: false,
       unexpectedError: null,
-      isSuccessLogin: false,
       isInvalidEmail: false,
     );
   }

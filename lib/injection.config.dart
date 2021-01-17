@@ -23,6 +23,8 @@ import 'common/domain/usecases/is_valid_email_use_case.dart';
 import 'auth/presentation/pages/login/bloc/login_bloc.dart';
 import 'auth/domain/usecases/login_use_case.dart';
 import 'auth/domain/usecases/login_use_case_impl.dart';
+import 'auth/domain/usecases/logout_use_case.dart';
+import 'auth/domain/usecases/logout_use_case_impl.dart';
 import 'auth/domain/entities/secure_storage.dart';
 
 /// adds generated dependencies
@@ -47,8 +49,14 @@ GetIt $initGetIt(
   gh.lazySingleton<IsLoggedUseCase>(
       () => IsLoggedUseCaseImpl(get<AuthRepository>()));
   gh.lazySingleton<LoginUseCase>(() => LoginUseCaseImpl(get<AuthRepository>()));
-  gh.lazySingleton<AuthBloc>(() => AuthBloc(get<IsLoggedUseCase>()));
-  gh.factory<LoginBloc>(
-      () => LoginBloc(get<IsValidEmailUseCase>(), get<LoginUseCase>()));
+  gh.lazySingleton<LogoutUseCase>(
+      () => LogoutUseCaseImpl(get<AuthRepository>()));
+  gh.lazySingleton<AuthBloc>(
+      () => AuthBloc(get<IsLoggedUseCase>(), get<LogoutUseCase>()));
+  gh.factory<LoginBloc>(() => LoginBloc(
+        get<IsValidEmailUseCase>(),
+        get<LoginUseCase>(),
+        get<AuthBloc>(),
+      ));
   return get;
 }

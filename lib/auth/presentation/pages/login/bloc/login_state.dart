@@ -8,7 +8,6 @@ abstract class LoginState with _$LoginState {
     bool isLoading,
     bool isValidForm,
     bool isInvalidEmail,
-    bool isSuccessLogin,
     String unexpectedError,
   }) = _LoginState;
 
@@ -19,7 +18,6 @@ abstract class LoginState with _$LoginState {
         unexpectedError: null,
         isValidForm: false,
         isInvalidEmail: false,
-        isSuccessLogin: false,
       );
 
   factory LoginState.cpfSelected() => LoginState(
@@ -29,7 +27,6 @@ abstract class LoginState with _$LoginState {
         unexpectedError: null,
         isValidForm: false,
         isInvalidEmail: false,
-        isSuccessLogin: false,
       );
 
   factory LoginState.emailSelected() => LoginState(
@@ -39,6 +36,5 @@ abstract class LoginState with _$LoginState {
         unexpectedError: null,
         isValidForm: false,
         isInvalidEmail: false,
-        isSuccessLogin: false,
       );
 }

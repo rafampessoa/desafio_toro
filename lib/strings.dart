@@ -4,6 +4,8 @@ class Strings {
   static const String unexpectedErrorDescription =
       "Infelizmente ocorreu um erro inesperado, tente novamente mais tarde";
   static const String invalidEmail = "E-mail inválido";
+  static const String logout = "Sair";
+  static const String unableToLogout = "Não foi possível sair do aplicativo";
 
   // Splash Page
   static const String toroInvestimentos = "Toro Investimentos";

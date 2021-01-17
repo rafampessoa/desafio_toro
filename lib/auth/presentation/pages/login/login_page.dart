@@ -295,11 +295,6 @@ class _LoginPageState extends State<LoginPage>
       return;
     }
 
-    if (state.isSuccessLogin) {
-      ExtendedNavigator.of(context).replace(Routes.homePage);
-      return;
-    }
-
     if (state.isCpfLogin) {
       tabController.animateTo(0);
     } else {
