@@ -21,6 +21,8 @@ Login
 
 Home
 
+CI/CD com github actions
+
 ## Recursos
 
 Injeção de dependência com get_it
