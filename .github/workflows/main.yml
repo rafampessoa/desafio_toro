@@ -5,6 +5,13 @@ jobs:
     name: Test flutter App
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "1.22.4"
       - run: flutter pub get
-      - run: flutter pub run build_runner --delete-conflicting-outputs
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
       - run: flutter test
