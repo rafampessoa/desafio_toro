@@ -21,7 +21,6 @@ Login
 
 Home
 
-CI/CD com github actions
 
 ## Recursos
 
@@ -32,6 +31,14 @@ Gerenciamento de rotas com auto_route
 Utilização de objetos imutáveis com freezed
 
 Gerenciamento de Estado com BLOC
+
+CI/CD com github actions
+
+Teste Unitários
+
+Teste de Widget
+
+Teste do Bloc
 
 ## Arquitetura
 
