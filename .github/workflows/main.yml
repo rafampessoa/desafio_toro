@@ -1,0 +1,10 @@
+on: push
+name: Test
+jobs:
+  test:
+    name: Test flutter App
+    runs-on: ubuntu-latest
+    steps:
+      - run: flutter pub get
+      - run: flutter pub run build_runner --delete-conflicting-outputs
+      - run: flutter test
