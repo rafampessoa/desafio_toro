@@ -38,7 +38,7 @@ void main() {
     BlocProvider(
       create: (context) => getIt<AuthBloc>()
         ..add(
-          AuthEvent.appStarted(context),
+          AuthEvent.appStarted(),
         ),
       child: App(),
     ),
