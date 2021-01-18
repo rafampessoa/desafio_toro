@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:desafioToro/assets.dart';
+import 'package:desafioToro/common/presentation/widgets/base_raised_button.dart';
 import 'package:desafioToro/constant.dart';
 import 'package:desafioToro/router.gr.dart';
 import 'package:desafioToro/strings.dart';
@@ -222,36 +223,33 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  OutlineButton _buildSignInBtn() {
-    return OutlineButton(
-      onPressed: () => ExtendedNavigator.of(context).replace(Routes.loginPage),
-      borderSide: BorderSide(
-        color: AppColors.primary,
-      ),
-      child: Center(
-        child: Text(
-          Strings.signIn,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: AppColors.primary,
+  Widget _buildSignInBtn() {
+    return Container(
+      height: 50.h,
+      child: OutlineButton(
+        onPressed: () =>
+            ExtendedNavigator.of(context).replace(Routes.loginPage),
+        borderSide: BorderSide(
+          color: AppColors.primary,
+        ),
+        child: Center(
+          child: Text(
+            Strings.signIn,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
+              fontSize: FontSize.body.sp,
+            ),
           ),
         ),
       ),
     );
   }
 
-  RaisedButton _buildOpenAccountBtn() {
-    return RaisedButton(
-      onPressed: () => null,
-      child: Center(
-        child: Text(
-          Strings.openYourAccount,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
+  Widget _buildOpenAccountBtn() {
+    return BaseRaisedButton(
+      onTap: () => null,
+      text: Strings.openYourAccount,
     );
   }
 }

@@ -10,7 +10,6 @@ final appThemeData = {
     fontFamily: 'Din Pro',
     buttonTheme: ButtonThemeData(
       buttonColor: AppColors.primary,
-      height: 50,
       textTheme: ButtonTextTheme.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(32),

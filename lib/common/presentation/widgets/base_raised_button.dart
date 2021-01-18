@@ -20,31 +20,34 @@ class BaseRaisedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      color: backgroundColor,
-      onPressed: isValid ? onTap : null,
-      child: AnimatedSwitcher(
-        duration: Duration(milliseconds: 200),
-        child: Center(
-          child: isLoading
-              ? CircularProgressIndicator(
-                  backgroundColor: Colors.white,
-                  strokeWidth: 1,
-                )
-              : Text(
-                  text,
-                  style: TextStyle(
-                    color: textColor != null
-                        ? textColor
-                        : backgroundColor != null
-                            ? backgroundColor.computeLuminance() > .5
-                                ? AppColors.primary
-                                : Colors.white
-                            : Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: FontSize.body.sp,
+    return Container(
+      height: 50.h,
+      child: RaisedButton(
+        color: backgroundColor,
+        onPressed: isValid ? onTap : null,
+        child: AnimatedSwitcher(
+          duration: Duration(milliseconds: 200),
+          child: Center(
+            child: isLoading
+                ? CircularProgressIndicator(
+                    backgroundColor: Colors.white,
+                    strokeWidth: 1,
+                  )
+                : Text(
+                    text,
+                    style: TextStyle(
+                      color: textColor != null
+                          ? textColor
+                          : backgroundColor != null
+                              ? backgroundColor.computeLuminance() > .5
+                                  ? AppColors.primary
+                                  : Colors.white
+                              : Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: FontSize.body.sp,
+                    ),
                   ),
-                ),
+          ),
         ),
       ),
     );
